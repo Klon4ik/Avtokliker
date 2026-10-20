@@ -1,0 +1,12 @@
+settings.json*
+*.tmp
+*.bak
+test-results.txt
+tests/profile-*.json*
+tests/*.txt
+tests/*.exe
+tests/visual-*.json*
+tests/preview/
+*.lnk
+dist/
+.work/

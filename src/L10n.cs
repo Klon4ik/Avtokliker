@@ -1,0 +1,152 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
+
+namespace AvtoClicker
+{
+    internal static class L10n
+    {
+        public static string Language { get; private set; }
+        public static string Normalize(string language) { return language == "en" ? "en" : "uk"; }
+        public static void SetLanguage(string language)
+        {
+            Language = Normalize(language);
+            CultureInfo culture = CultureInfo.GetCultureInfo(Language == "en" ? "en-US" : "uk-UA");
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+        }
+        public static string T(string ukrainian)
+        {
+            string english;
+            return Language == "en" && English.TryGetValue(ukrainian, out english) ? english : ukrainian;
+        }
+        private static readonly Dictionary<string, string> English = new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "Автоклікер", "Auto Clicker" },
+            { "АВТОКЛІКЕР", "AUTO CLICKER" },
+            { "Ваші точки. Ваші інтервали. Один запуск.", "Your points. Your intervals. One start." },
+            { "МИША  +  КЛАВІАТУРА", "MOUSE  +  KEYBOARD" },
+            { "+ Точка кліку", "+ Click point" },
+            { "+ Клавіша", "+ Key" },
+            { "Змінити", "Edit" },
+            { "Копія", "Duplicate" },
+            { "Видалити", "Remove" },
+            { "Відкрити профіль", "Open profile" },
+            { "Зберегти профіль", "Save profile" },
+            { "Список дій", "Actions" },
+            { "Увімк.", "On" },
+            { "Назва", "Name" },
+            { "Дія", "Action" },
+            { "Точка / клавіша", "Point / key" },
+            { "Інтервал, с", "Interval, s" },
+            { "Затримка, с", "Delay, s" },
+            { "Повторення", "Repeats" },
+            { "Виконано", "Completed" },
+            { "Додайте першу дію\n\nТочку кліку або клавішу можна налаштувати\nз окремим інтервалом і кількістю повторень.", "Add your first action\n\nEach click point or key can have its own\ninterval and repeat count." },
+            { "Відлік перед запуском:", "Start countdown:" },
+            { "Відлік перед запуском у секундах", "Start countdown in seconds" },
+            { "с", "s" },
+            { "Згортати вікно під час запуску", "Minimize on start" },
+            { "Налаштування зберігаються автоматично", "Settings are saved automatically" },
+            { "Показати точки на екрані", "Show click points on screen" },
+            { "Розставити точки", "Arrange points" },
+            { "Тягніть кружки · центр — місце кліку · подвійний клік — змінити", "Drag circles · center = click position · double-click to edit" },
+            { "Спочатку додайте хоча б одну точку кліку. Для кількох кружків додайте точки або натисніть «Копія».", "Add a click point first. Add more points or use Duplicate to create multiple circles." },
+            { "▶ Запустити · F8", "▶ Start · F8" },
+            { "■ Стоп · F9", "■ Stop · F9" },
+            { "Зупинити · F8", "Stop · F8" },
+            { "Готово до запуску", "Ready to start" },
+            { "Додайте дії у список", "Add actions to the list" },
+            { "0 дій", "0 actions" },
+            { "F6 — координати курсора для вибраної точки     •     F8 — запуск / зупинка     •     F9 — негайна зупинка", "F6 — capture cursor for selected point     •     F8 — start / stop     •     F9 — stop immediately" },
+            { "Можна додати не більше 500 дій.", "You can add up to 500 actions." },
+            { "Точка ", "Point " },
+            { "Клавіша ", "Key " },
+            { " (копія)", " (copy)" },
+            { "Точка: ", "Point: " },
+            { " увімкн. / ", " enabled / " },
+            { " у списку", " total" },
+            { " · не збережено", " · not saved" },
+            { "Зупинено", "Stopped" },
+            { "Не вдалося зареєструвати гарячі клавіші. Закрийте іншу програму, що використовує F6, F8 або F9, і перезапустіть автоклікер.", "Could not register hotkeys. Close any other app using F6, F8 or F9, then restart Auto Clicker." },
+            { "Точка «", "Point \u201c" },
+            { "» поза екраном. Оновіть її координати клавішею F6.", "\u201d is off screen. Update its coordinates with F6." },
+            { "» розташована над вікном автоклікера. Увімкніть згортання або перемістіть вікно.", "\u201d is over the Auto Clicker window. Enable Minimize on start or move the window." },
+            { "Додайте й увімкніть хоча б одну дію.", "Add and enable at least one action." },
+            { "Запуск через ", "Starting in " },
+            { " с", " s" },
+            { "Перейдіть у потрібне вікно · F9 — скасувати", "Switch to your target window · F9 to cancel" },
+            { "Не вдалося запустити", "Could not start" },
+            { "Виконується", "Running" },
+            { " дій із незалежними інтервалами · F9 — стоп", " actions with independent intervals · F9 to stop" },
+            { "Усі повторення виконано", "All repetitions completed" },
+            { "Виконання зупинено", "Execution stopped" },
+            { " дій", " actions" },
+            { "Одна з клавіш F6, F8, F9 уже використовується іншою програмою. Закрийте її та перезапустіть автоклікер.", "F6, F8 or F9 is already in use by another app. Close that app and restart Auto Clicker." },
+            { "Зупинено клавішею F9", "Stopped with F9" },
+            { "Відновлено останню резервну копію налаштувань. ", "Restored the last settings backup. " },
+            { "Не вдалося прочитати налаштування. Відкрито порожній профіль. ", "Could not read settings. Opened an empty profile. " },
+            { "Не вдалося зберегти налаштування", "Could not save settings" },
+            { "Профіль автоклікера (*.json)|*.json", "Auto Clicker profile (*.json)|*.json" },
+            { "Профіль відкрито", "Profile opened" },
+            { "Не вдалося відкрити профіль. ", "Could not open profile. " },
+            { "Мій профіль.json", "My profile.json" },
+            { "Профіль збережено", "Profile saved" },
+            { "Не вдалося зберегти профіль. ", "Could not save profile. " },
+            { "Точка кліку", "Click point" },
+            { "Натискання клавіші", "Key press" },
+            { "Назва дії", "Action name" },
+            { "Кнопка миші", "Mouse button" },
+            { "Ліва кнопка", "Left button" },
+            { "Права кнопка", "Right button" },
+            { "Середня кнопка", "Middle button" },
+            { "Координата X", "X coordinate" },
+            { "Координата Y", "Y coordinate" },
+            { "Координати X / Y", "Coordinates X / Y" },
+            { "Вибрати на екрані · 3 с", "Pick on screen · 3 s" },
+            { "Наведіть курсор на потрібне місце.", "Move the cursor to the desired position." },
+            { "Клавіша", "Key" },
+            { "Комбінація з", "Combine with" },
+            { "Натискання надсилаються в активне вікно.\nF6, F8 та F9 зарезервовані для керування.", "Keys are sent to the active window.\nF6, F8 and F9 are reserved for hotkeys." },
+            { "Інтервал у секундах", "Interval in seconds" },
+            { "Затримка у секундах", "Delay in seconds" },
+            { "Кількість повторень", "Repeat count" },
+            { "Затримка першої дії, с", "Initial delay, s" },
+            { "Повторення (0 = ∞)", "Repeats (0 = unlimited)" },
+            { "Зберегти", "Save" },
+            { "Скасувати", "Cancel" },
+            { "Точку збережено: ", "Point captured: " },
+            { "Перевірте дію", "Check action" },
+            { "Нова дія", "New action" },
+            { "Клавіатура", "Keyboard" },
+            { "Правий клік", "Right click" },
+            { "Середній клік", "Middle click" },
+            { "Лівий клік", "Left click" },
+            { "Назва має містити від 1 до 80 символів.", "The name must contain 1 to 80 characters." },
+            { "Невідомий тип дії.", "Unknown action type." },
+            { "Інтервал: від 0,01 до 86 400 секунд.", "Interval: 0.01 to 86,400 seconds." },
+            { "Некоректна затримка або кількість повторень.", "Invalid initial delay or repeat count." },
+            { "Невідома кнопка миші.", "Unknown mouse button." },
+            { "Непідтримувана клавіша. F6, F8 та F9 зарезервовані для керування.", "Unsupported key. F6, F8 and F9 are reserved for hotkeys." },
+            { "Space (пробіл)", "Space" },
+            { "Непідтримувана версія профілю.", "Unsupported profile version." },
+            { "Відлік перед запуском: від 0 до 60 секунд.", "Start countdown: 0 to 60 seconds." },
+            { "Профіль може містити до 500 дій.", "A profile can contain up to 500 actions." },
+            { "Профіль містить порожню дію.", "The profile contains an empty action." },
+            { "Файл профілю завеликий.", "The profile file is too large." },
+            { "Порожній профіль.", "Empty profile." },
+            { "Точка кліку ", "Click point " },
+            { "\nІнтервал: ", "\nInterval: " },
+            { " · вимкнено", " · disabled" },
+            { "\nПеретягніть, щоб перемістити. Подвійний клік — змінити.", "\nDrag to move. Double-click to edit." },
+            { "» поза межами підключених екранів.", "\u201d is outside the connected displays." },
+            { "Windows не прийняла введення. Якщо цільова програма працює від адміністратора, запустіть автоклікер із такими самими правами.", "Windows did not accept input. If the target app is running as administrator, run Auto Clicker with the same privileges." },
+            { "Увімкніть хоча б одну дію.", "Enable at least one action." },
+            { "Автоклікер: планувальник", "Auto Clicker: scheduler" },
+            { "Автоклікер уже запущено. Відкрийте його на панелі завдань.", "Auto Clicker is already running. Open it from the taskbar." },
+            { "Автоклікер: помилка", "Auto Clicker: error" },
+            { "Непідтримувана мова інтерфейсу.", "Unsupported interface language." }
+        };
+    }
+}
